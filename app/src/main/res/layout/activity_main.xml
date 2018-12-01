@@ -1,18 +1,164 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/main_background"
     tools:context=".MainActivity">
 
     <TextView
+        android:id="@+id/titleTextView_L"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:fontFamily="@font/harry_potter"
+        android:text="L"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:textAlignment="center"
+        android:textColor="@color/colorAccent"
+        android:textSize="75dp" />
+    <TextView
+        android:id="@+id/titleTextView_u"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/titleTextView_L"
+        android:layout_alignParentTop="true"
+        android:fontFamily="@font/harry_potter"
+        android:text="u"
+        android:layout_marginTop="20dp"
+        android:textAlignment="center"
+        android:textColor="@color/colorAccent"
+        android:textSize="75dp" />
+    <TextView
+        android:id="@+id/titleTextView_m"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/titleTextView_u"
+        android:layout_alignParentTop="true"
+        android:fontFamily="@font/harry_potter"
+        android:text="m"
+        android:layout_marginTop="20dp"
+        android:textAlignment="center"
+        android:textColor="@color/colorAccent"
+        android:textSize="75dp" />
+    <TextView
+        android:id="@+id/titleTextView_o"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/titleTextView_m"
+        android:layout_alignParentTop="true"
+        android:fontFamily="@font/harry_potter"
+        android:text="o"
+        android:layout_marginTop="20dp"
+        android:textAlignment="center"
+        android:textColor="@color/colorAccent"
+        android:textSize="75dp" />
+    <TextView
+        android:id="@+id/titleTextView_s"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/titleTextView_o"
+        android:layout_alignParentTop="true"
+        android:fontFamily="@font/harry_potter"
+        android:text="s"
+        android:layout_marginTop="20dp"
+        android:textAlignment="center"
+        android:textColor="@color/colorAccent"
+        android:textSize="75dp" />
 
-</android.support.constraint.ConstraintLayout>
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_centerInParent="true">
+
+        <RelativeLayout
+            android:id="@+id/lumosRelativeLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/lumosTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="20dp"
+                android:fontFamily="@font/harry_potter"
+                android:text="Lumos"
+                android:textAlignment="viewStart"
+                android:textColor="#FFF"
+                android:textSize="35dp" />
+
+            <android.support.v7.widget.SwitchCompat
+                android:id="@+id/lumosSwitchCompact"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="20dp" />
+        </RelativeLayout>
+
+        <!--<RelativeLayout-->
+            <!--android:id="@+id/slowBlinkRelativeLayout"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_below="@id/onOffRelativeLayout"-->
+            <!--android:layout_marginTop="25dp">-->
+
+            <!--<TextView-->
+                <!--android:id="@+id/slowBlinkTextView"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_alignParentLeft="true"-->
+                <!--android:layout_centerVertical="true"-->
+                <!--android:layout_marginLeft="20dp"-->
+                <!--android:fontFamily="@font/harry_potter"-->
+                <!--android:text="Lumos Alternata"-->
+                <!--android:textAlignment="viewStart"-->
+                <!--android:textColor="#FFF"-->
+                <!--android:textSize="35dp"/>-->
+
+            <!--<android.support.v7.widget.SwitchCompat-->
+                <!--android:id="@+id/slowBlinkSwitchCompact"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_alignParentRight="true"-->
+                <!--android:layout_centerVertical="true"-->
+                <!--android:layout_marginRight="20dp" />-->
+        <!--</RelativeLayout>-->
+
+        <!--<RelativeLayout-->
+            <!--android:id="@+id/fastBlinkRelativeLayout"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_below="@id/slowBlinkRelativeLayout"-->
+            <!--android:layout_marginTop="25dp">-->
+
+            <!--<TextView-->
+                <!--android:id="@+id/fastBlinkTextView"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_alignParentLeft="true"-->
+                <!--android:layout_centerVertical="true"-->
+                <!--android:layout_marginLeft="20dp"-->
+                <!--android:fontFamily="@font/harry_potter"-->
+                <!--android:text="Lumos Fast Alternata"-->
+                <!--android:textAlignment="viewStart"-->
+                <!--android:textColor="#FFF"-->
+                <!--android:textSize="35dp"/>-->
+
+            <!--<android.support.v7.widget.SwitchCompat-->
+                <!--android:id="@+id/fastBlinkSwitchCompact"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_alignParentRight="true"-->
+                <!--android:layout_centerVertical="true"-->
+                <!--android:layout_marginRight="20dp" />-->
+        <!--</RelativeLayout>-->
+
+    </RelativeLayout>
+
+</RelativeLayout>
