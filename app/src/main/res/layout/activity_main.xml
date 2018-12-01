@@ -97,7 +97,7 @@
                 android:fontFamily="@font/harry_potter"
                 android:text="Lumos"
                 android:textAlignment="viewStart"
-                android:textColor="#FFF"
+                android:textColor="@color/white"
                 android:textSize="35dp" />
 
             <android.support.v7.widget.SwitchCompat
@@ -195,7 +195,7 @@
             android:layout_toRightOf="@id/musicImageButton"
             android:layout_height="wrap_content"
             android:background="#00000000"
-            android:src="@drawable/music_off" />
+            android:src="@drawable/sound_off" />
 
     </RelativeLayout>
 

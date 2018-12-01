@@ -1,5 +1,6 @@
 package com.example.aditya.starlight;
 
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.hardware.Camera;
@@ -7,6 +8,7 @@ import android.hardware.camera2.CameraManager;
 import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SwitchCompat;
 import android.view.View;
@@ -14,8 +16,10 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Random;
 
@@ -30,11 +34,12 @@ public class MainActivity extends AppCompatActivity {
 
     private TextView titleTextView_L, titleTextView_u, titleTextView_m, titleTextView_o, titleTextView_s;
 
-    TextView lumosTextView;
-    SwitchCompat lumosSwitchCompact;
-    ImageButton musicImageButton, soundImageButton;
+    private TextView lumosTextView;
+    private SwitchCompat lumosSwitchCompact;
+    private ImageButton musicImageButton, soundImageButton;
+    private boolean isFlashOn = false;
 
-    MediaPlayer musicMediaPlayer;
+    private MediaPlayer musicMediaPlayer, soundMediaPlayer;
 
     private static class Settings {
         static boolean music = false;
@@ -47,6 +52,36 @@ public class MainActivity extends AppCompatActivity {
 
     static {
         random = new Random();
+    }
+
+    private void turnOnFlashLight() {
+        try {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                cameraManager.setTorchMode(cameraID, true);
+            } else {
+                cameraParams.setFlashMode(android.hardware.Camera.Parameters.FLASH_MODE_TORCH);
+                camera.setParameters(cameraParams);
+                camera.startPreview();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        isFlashOn = true;
+    }
+
+    private void turnOffFlashLight() {
+        try {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                cameraManager.setTorchMode(cameraID, false);
+            } else {
+                cameraParams.setFlashMode(android.hardware.Camera.Parameters.FLASH_MODE_OFF);
+                camera.setParameters(cameraParams);
+                camera.startPreview();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        isFlashOn = false;
     }
 
     private void initializeAndAnimateTitleView() {
@@ -86,6 +121,25 @@ public class MainActivity extends AppCompatActivity {
 
         lumosTextView = findViewById(R.id.lumosTextView);
         lumosSwitchCompact = findViewById(R.id.lumosSwitchCompact);
+        lumosSwitchCompact.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    turnOnFlashLight();
+                    if (Settings.sound){
+                        soundMediaPlayer.start();
+                    }
+
+                    lumosTextView.setText("Nox");
+                    lumosTextView.setTextColor(MainActivity.this.getResources().getColor(R.color.colorAccent));
+                } else {
+                    turnOffFlashLight();
+
+                    lumosTextView.setText("Lumos");
+                    lumosTextView.setTextColor(MainActivity.this.getResources().getColor(R.color.white));
+                }
+            }
+        });
 
         musicImageButton = findViewById(R.id.musicImageButton);
         musicMediaPlayer = MediaPlayer.create(MainActivity.this, R.raw.harry_potter_theme);
@@ -102,6 +156,8 @@ public class MainActivity extends AppCompatActivity {
 
                     musicMediaPlayer.pause();
 
+                    Toast.makeText(MainActivity.this, "Music Turned Off!", Toast.LENGTH_SHORT).show();
+
                     musicImageButton.setImageResource(R.drawable.music_off);
                 } else {
                     Settings.music = true;
@@ -111,11 +167,39 @@ public class MainActivity extends AppCompatActivity {
 
                     musicMediaPlayer.start();
 
+                    Toast.makeText(MainActivity.this, "Music Turned On!", Toast.LENGTH_SHORT).show();
+
                     musicImageButton.setImageResource(R.drawable.music_on);
                 }
             }
         });
         soundImageButton = findViewById(R.id.soundImageButton);
+        soundMediaPlayer= MediaPlayer.create(MainActivity.this, R.raw.lumos_theme);
+        soundMediaPlayer.setVolume(100, 100);
+        soundImageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (Settings.sound) {
+                    Settings.sound = false;
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putBoolean("sound", Settings.sound);
+                    editor.commit();
+
+                    Toast.makeText(MainActivity.this, "Sound Turned Off!", Toast.LENGTH_SHORT).show();
+
+                    soundImageButton.setImageResource(R.drawable.sound_off);
+                } else {
+                    Settings.sound = true;
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putBoolean("music", Settings.sound);
+                    editor.commit();
+
+                    Toast.makeText(MainActivity.this, "Sound Turned On!", Toast.LENGTH_SHORT).show();
+
+                    soundImageButton.setImageResource(R.drawable.sound_on);
+                }
+            }
+        });
     }
 
     private void checkFlashAvailability() {
@@ -133,12 +217,24 @@ public class MainActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
         }
+
+        if (!isFlashAvailable) {
+            AlertDialog alert = new AlertDialog.Builder(MainActivity.this).create();
+            alert.setTitle("No Flash");
+            alert.setMessage("Your wand cannot incantate LUMOS!");
+            alert.setButton(DialogInterface.BUTTON_POSITIVE, "CLOSE THE APP", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    finish();
+                }
+            });
+            alert.show();
+        }
     }
 
     private void loadSettings() {
         sharedPreferences = this.getSharedPreferences("settings", MODE_PRIVATE);
         Settings.music = sharedPreferences.getBoolean("music", false);
-        Settings.sound = sharedPreferences.getBoolean("music", false);
+        Settings.sound = sharedPreferences.getBoolean("sound", false);
     }
 
     @Override
