@@ -6,77 +6,85 @@
     android:background="@drawable/main_background"
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/titleTextView_L"
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:fontFamily="@font/harry_potter"
-        android:text="L"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="20dp"
-        android:textAlignment="center"
-        android:textColor="@color/colorAccent"
-        android:textSize="75dp" />
-    <TextView
-        android:id="@+id/titleTextView_u"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/titleTextView_L"
-        android:layout_alignParentTop="true"
-        android:fontFamily="@font/harry_potter"
-        android:text="u"
-        android:layout_marginTop="20dp"
-        android:textAlignment="center"
-        android:textColor="@color/colorAccent"
-        android:textSize="75dp" />
-    <TextView
-        android:id="@+id/titleTextView_m"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/titleTextView_u"
-        android:layout_alignParentTop="true"
-        android:fontFamily="@font/harry_potter"
-        android:text="m"
-        android:layout_marginTop="20dp"
-        android:textAlignment="center"
-        android:textColor="@color/colorAccent"
-        android:textSize="75dp" />
-    <TextView
-        android:id="@+id/titleTextView_o"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/titleTextView_m"
-        android:layout_alignParentTop="true"
-        android:fontFamily="@font/harry_potter"
-        android:text="o"
-        android:layout_marginTop="20dp"
-        android:textAlignment="center"
-        android:textColor="@color/colorAccent"
-        android:textSize="75dp" />
-    <TextView
-        android:id="@+id/titleTextView_s"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/titleTextView_o"
-        android:layout_alignParentTop="true"
-        android:fontFamily="@font/harry_potter"
-        android:text="s"
-        android:layout_marginTop="20dp"
-        android:textAlignment="center"
-        android:textColor="@color/colorAccent"
-        android:textSize="75dp" />
+        android:background="@drawable/main_custom_title"
+        android:gravity="center"
+        android:padding="25dp">
+
+        <TextView
+            android:id="@+id/titleTextView_L"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/harry_potter"
+            android:text="L"
+            android:textAlignment="center"
+            android:textColor="@color/colorAccent"
+            android:textSize="75dp" />
+
+        <TextView
+            android:id="@+id/titleTextView_u"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@id/titleTextView_L"
+            android:fontFamily="@font/harry_potter"
+            android:text="u"
+            android:textAlignment="center"
+            android:textColor="@color/colorAccent"
+            android:textSize="75dp" />
+
+        <TextView
+            android:id="@+id/titleTextView_m"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@id/titleTextView_u"
+            android:fontFamily="@font/harry_potter"
+            android:text="m"
+            android:textAlignment="center"
+            android:textColor="@color/colorAccent"
+            android:textSize="75dp" />
+
+        <TextView
+            android:id="@+id/titleTextView_o"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/titleTextView_m"
+            android:fontFamily="@font/harry_potter"
+            android:text="o"
+            android:textAlignment="center"
+            android:textColor="@color/colorAccent"
+            android:textSize="75dp" />
+
+        <TextView
+            android:id="@+id/titleTextView_s"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@id/titleTextView_o"
+            android:fontFamily="@font/harry_potter"
+            android:text="s"
+            android:textAlignment="center"
+            android:textColor="@color/colorAccent"
+            android:textSize="75dp" />
+
+    </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:layout_centerInParent="true">
+        android:layout_centerInParent="true"
+        android:background="@drawable/main_custom_commands"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:padding="25dp"
+        android:gravity="center">
 
         <RelativeLayout
             android:id="@+id/lumosRelativeLayout"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
             <TextView
@@ -102,62 +110,92 @@
         </RelativeLayout>
 
         <!--<RelativeLayout-->
-            <!--android:id="@+id/slowBlinkRelativeLayout"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_below="@id/onOffRelativeLayout"-->
-            <!--android:layout_marginTop="25dp">-->
+        <!--android:id="@+id/slowBlinkRelativeLayout"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_below="@id/onOffRelativeLayout"-->
+        <!--android:layout_marginTop="25dp">-->
 
-            <!--<TextView-->
-                <!--android:id="@+id/slowBlinkTextView"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_alignParentLeft="true"-->
-                <!--android:layout_centerVertical="true"-->
-                <!--android:layout_marginLeft="20dp"-->
-                <!--android:fontFamily="@font/harry_potter"-->
-                <!--android:text="Lumos Alternata"-->
-                <!--android:textAlignment="viewStart"-->
-                <!--android:textColor="#FFF"-->
-                <!--android:textSize="35dp"/>-->
+        <!--<TextView-->
+        <!--android:id="@+id/slowBlinkTextView"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentLeft="true"-->
+        <!--android:layout_centerVertical="true"-->
+        <!--android:layout_marginLeft="20dp"-->
+        <!--android:fontFamily="@font/harry_potter"-->
+        <!--android:text="Lumos Alternata"-->
+        <!--android:textAlignment="viewStart"-->
+        <!--android:textColor="#FFF"-->
+        <!--android:textSize="35dp"/>-->
 
-            <!--<android.support.v7.widget.SwitchCompat-->
-                <!--android:id="@+id/slowBlinkSwitchCompact"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_alignParentRight="true"-->
-                <!--android:layout_centerVertical="true"-->
-                <!--android:layout_marginRight="20dp" />-->
+        <!--<android.support.v7.widget.SwitchCompat-->
+        <!--android:id="@+id/slowBlinkSwitchCompact"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentRight="true"-->
+        <!--android:layout_centerVertical="true"-->
+        <!--android:layout_marginRight="20dp" />-->
         <!--</RelativeLayout>-->
 
         <!--<RelativeLayout-->
-            <!--android:id="@+id/fastBlinkRelativeLayout"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_below="@id/slowBlinkRelativeLayout"-->
-            <!--android:layout_marginTop="25dp">-->
+        <!--android:id="@+id/fastBlinkRelativeLayout"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_below="@id/slowBlinkRelativeLayout"-->
+        <!--android:layout_marginTop="25dp">-->
 
-            <!--<TextView-->
-                <!--android:id="@+id/fastBlinkTextView"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_alignParentLeft="true"-->
-                <!--android:layout_centerVertical="true"-->
-                <!--android:layout_marginLeft="20dp"-->
-                <!--android:fontFamily="@font/harry_potter"-->
-                <!--android:text="Lumos Fast Alternata"-->
-                <!--android:textAlignment="viewStart"-->
-                <!--android:textColor="#FFF"-->
-                <!--android:textSize="35dp"/>-->
+        <!--<TextView-->
+        <!--android:id="@+id/fastBlinkTextView"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentLeft="true"-->
+        <!--android:layout_centerVertical="true"-->
+        <!--android:layout_marginLeft="20dp"-->
+        <!--android:fontFamily="@font/harry_potter"-->
+        <!--android:text="Lumos Fast Alternata"-->
+        <!--android:textAlignment="viewStart"-->
+        <!--android:textColor="#FFF"-->
+        <!--android:textSize="35dp"/>-->
 
-            <!--<android.support.v7.widget.SwitchCompat-->
-                <!--android:id="@+id/fastBlinkSwitchCompact"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_alignParentRight="true"-->
-                <!--android:layout_centerVertical="true"-->
-                <!--android:layout_marginRight="20dp" />-->
+        <!--<android.support.v7.widget.SwitchCompat-->
+        <!--android:id="@+id/fastBlinkSwitchCompact"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentRight="true"-->
+        <!--android:layout_centerVertical="true"-->
+        <!--android:layout_marginRight="20dp" />-->
         <!--</RelativeLayout>-->
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/main_custom_bottom_tab"
+        android:gravity="center"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp">
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:id="@+id/musicImageButton"
+            android:layout_height="wrap_content"
+            android:background="#00000000"
+            android:src="@drawable/music_off" />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:id="@+id/soundImageButton"
+            android:layout_marginLeft="30dp"
+            android:layout_toRightOf="@id/musicImageButton"
+            android:layout_height="wrap_content"
+            android:background="#00000000"
+            android:src="@drawable/music_off" />
 
     </RelativeLayout>
 
