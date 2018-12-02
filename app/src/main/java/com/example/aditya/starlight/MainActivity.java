@@ -34,10 +34,11 @@ public class MainActivity extends AppCompatActivity {
 
     private TextView titleTextView_L, titleTextView_u, titleTextView_m, titleTextView_o, titleTextView_s;
 
-    private TextView lumosTextView;
-    private SwitchCompat lumosSwitchCompact;
+    private TextView lumosTextView, lumosAternetaTextView;
+    private SwitchCompat lumosSwitchCompact, lumosAlternetaSwitchCompact;
     private ImageButton musicImageButton, soundImageButton;
-    private boolean isFlashOn = false;
+    private boolean isFlashOn = false, isLumosOn = false, isLumosAlternetaOn = false;
+    private Thread lumosAlternetaThread = null;
 
     private MediaPlayer musicMediaPlayer, soundMediaPlayer;
 
@@ -116,6 +117,72 @@ public class MainActivity extends AppCompatActivity {
         titleTextView_s.startAnimation(titleTextView_s_Animation);
     }
 
+    private void lumos(boolean state){
+        if (isLumosAlternetaOn){
+            lumosAlterneta(false);
+            lumosAlternetaSwitchCompact.setChecked(false);
+        }
+
+        if (state) {
+            turnOnFlashLight();
+            if (Settings.sound){
+                soundMediaPlayer.start();
+            }
+
+            lumosTextView.setText("Nox");
+            lumosTextView.setTextColor(MainActivity.this.getResources().getColor(R.color.colorAccent));
+            isLumosOn = true;
+        } else {
+            turnOffFlashLight();
+
+            lumosTextView.setText("Lumos");
+            lumosTextView.setTextColor(MainActivity.this.getResources().getColor(R.color.white));
+            isLumosOn = false;
+        }
+    }
+
+    private void lumosAlterneta(boolean state){
+        if (isLumosOn){
+            lumos(false);
+            lumosSwitchCompact.setChecked(false);
+        }
+
+        if (state) {
+            lumosAlternetaThread = new Thread() {
+                @Override
+                public void run() {
+                    try {
+                        while (true) {
+                            turnOnFlashLight();
+                            sleep(500);
+                            turnOffFlashLight();
+                            sleep(500);
+                        }
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            };
+            lumosAlternetaThread.start();
+            if (Settings.sound){
+                soundMediaPlayer.start();
+            }
+
+            lumosAternetaTextView.setText("Nox");
+            lumosAternetaTextView.setTextColor(MainActivity.this.getResources().getColor(R.color.colorAccent));
+            isLumosAlternetaOn = true;
+        } else {
+            if(lumosAlternetaThread != null){
+                lumosAlternetaThread.interrupt();
+            }
+            turnOffFlashLight();
+            lumosAlternetaThread = null;
+            lumosAternetaTextView.setText("Lumos Alterneta");
+            lumosAternetaTextView.setTextColor(MainActivity.this.getResources().getColor(R.color.white));
+            isLumosAlternetaOn = false;
+        }
+    }
+
     private void initializeViews() {
         initializeAndAnimateTitleView();
 
@@ -124,20 +191,16 @@ public class MainActivity extends AppCompatActivity {
         lumosSwitchCompact.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    turnOnFlashLight();
-                    if (Settings.sound){
-                        soundMediaPlayer.start();
-                    }
+                lumos(isChecked);
+            }
+        });
 
-                    lumosTextView.setText("Nox");
-                    lumosTextView.setTextColor(MainActivity.this.getResources().getColor(R.color.colorAccent));
-                } else {
-                    turnOffFlashLight();
-
-                    lumosTextView.setText("Lumos");
-                    lumosTextView.setTextColor(MainActivity.this.getResources().getColor(R.color.white));
-                }
+        lumosAternetaTextView = findViewById(R.id.lumosAlternetaTextView);
+        lumosAlternetaSwitchCompact = findViewById(R.id.lumosAlternetaSwitchCompact);
+        lumosAlternetaSwitchCompact.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                lumosAlterneta(isChecked);
             }
         });
 
@@ -145,6 +208,10 @@ public class MainActivity extends AppCompatActivity {
         musicMediaPlayer = MediaPlayer.create(MainActivity.this, R.raw.harry_potter_theme);
         musicMediaPlayer.setLooping(true);
         musicMediaPlayer.setVolume(100, 100);
+        if(Settings.music){
+            musicImageButton.setImageResource(R.drawable.music_on);
+            musicMediaPlayer.start();
+        }
         musicImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -176,6 +243,9 @@ public class MainActivity extends AppCompatActivity {
         soundImageButton = findViewById(R.id.soundImageButton);
         soundMediaPlayer= MediaPlayer.create(MainActivity.this, R.raw.lumos_theme);
         soundMediaPlayer.setVolume(100, 100);
+        if(Settings.sound){
+            soundImageButton.setImageResource(R.drawable.sound_on);
+        }
         soundImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -191,7 +261,7 @@ public class MainActivity extends AppCompatActivity {
                 } else {
                     Settings.sound = true;
                     SharedPreferences.Editor editor = sharedPreferences.edit();
-                    editor.putBoolean("music", Settings.sound);
+                    editor.putBoolean("sound", Settings.sound);
                     editor.commit();
 
                     Toast.makeText(MainActivity.this, "Sound Turned On!", Toast.LENGTH_SHORT).show();

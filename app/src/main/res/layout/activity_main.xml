@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/main_background"
+    android:animateLayoutChanges="true"
     tools:context=".MainActivity">
 
     <RelativeLayout
@@ -73,14 +74,15 @@
     </RelativeLayout>
 
     <RelativeLayout
+        android:id="@+id/commandsRelativeLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:background="@drawable/main_custom_commands"
         android:layout_marginLeft="25dp"
         android:layout_marginRight="25dp"
-        android:padding="25dp"
-        android:gravity="center">
+        android:background="@drawable/main_custom_commands"
+        android:gravity="center"
+        android:padding="25dp">
 
         <RelativeLayout
             android:id="@+id/lumosRelativeLayout"
@@ -109,65 +111,59 @@
                 android:layout_marginRight="20dp" />
         </RelativeLayout>
 
-        <!--<RelativeLayout-->
-        <!--android:id="@+id/slowBlinkRelativeLayout"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_below="@id/onOffRelativeLayout"-->
-        <!--android:layout_marginTop="25dp">-->
+        <RelativeLayout
+            android:id="@+id/lumosAlternetaRelativeLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/lumosRelativeLayout"
+            android:layout_marginTop="25dp">
 
-        <!--<TextView-->
-        <!--android:id="@+id/slowBlinkTextView"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_alignParentLeft="true"-->
-        <!--android:layout_centerVertical="true"-->
-        <!--android:layout_marginLeft="20dp"-->
-        <!--android:fontFamily="@font/harry_potter"-->
-        <!--android:text="Lumos Alternata"-->
-        <!--android:textAlignment="viewStart"-->
-        <!--android:textColor="#FFF"-->
-        <!--android:textSize="35dp"/>-->
+            <TextView
+                android:id="@+id/lumosAlternetaTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="20dp"
+                android:fontFamily="@font/harry_potter"
+                android:text="Lumos Alternata"
+                android:textAlignment="viewStart"
+                android:textColor="@color/white"
+                android:textSize="35dp" />
 
-        <!--<android.support.v7.widget.SwitchCompat-->
-        <!--android:id="@+id/slowBlinkSwitchCompact"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_alignParentRight="true"-->
-        <!--android:layout_centerVertical="true"-->
-        <!--android:layout_marginRight="20dp" />-->
-        <!--</RelativeLayout>-->
-
-        <!--<RelativeLayout-->
-        <!--android:id="@+id/fastBlinkRelativeLayout"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_below="@id/slowBlinkRelativeLayout"-->
-        <!--android:layout_marginTop="25dp">-->
-
-        <!--<TextView-->
-        <!--android:id="@+id/fastBlinkTextView"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_alignParentLeft="true"-->
-        <!--android:layout_centerVertical="true"-->
-        <!--android:layout_marginLeft="20dp"-->
-        <!--android:fontFamily="@font/harry_potter"-->
-        <!--android:text="Lumos Fast Alternata"-->
-        <!--android:textAlignment="viewStart"-->
-        <!--android:textColor="#FFF"-->
-        <!--android:textSize="35dp"/>-->
-
-        <!--<android.support.v7.widget.SwitchCompat-->
-        <!--android:id="@+id/fastBlinkSwitchCompact"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_alignParentRight="true"-->
-        <!--android:layout_centerVertical="true"-->
-        <!--android:layout_marginRight="20dp" />-->
-        <!--</RelativeLayout>-->
+            <android.support.v7.widget.SwitchCompat
+                android:id="@+id/lumosAlternetaSwitchCompact"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="20dp" />
+        </RelativeLayout>
 
     </RelativeLayout>
+
+    <!--<RelativeLayout
+        android:id="@+id/lumosAlternetaSeekBarRelativeLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/commandsRelativeLayout"
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:background="@drawable/main_custom_commands"
+        android:gravity="center"
+        android:visibility="invisible"
+        android:padding="25dp">
+
+        <SeekBar
+            android:id="@+id/lumosAlternetaSeekBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:max="5"
+            android:progress="2" />
+
+    </RelativeLayout>-->
 
     <RelativeLayout
         android:layout_width="wrap_content"
@@ -176,24 +172,24 @@
         android:layout_centerHorizontal="true"
         android:background="@drawable/main_custom_bottom_tab"
         android:gravity="center"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
         android:paddingLeft="20dp"
-        android:paddingRight="20dp">
+        android:paddingTop="10dp"
+        android:paddingRight="20dp"
+        android:paddingBottom="10dp">
 
         <ImageButton
-            android:layout_width="wrap_content"
             android:id="@+id/musicImageButton"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="#00000000"
             android:src="@drawable/music_off" />
 
         <ImageButton
-            android:layout_width="wrap_content"
             android:id="@+id/soundImageButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
             android:layout_toRightOf="@id/musicImageButton"
-            android:layout_height="wrap_content"
             android:background="#00000000"
             android:src="@drawable/sound_off" />
 
